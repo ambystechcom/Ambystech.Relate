@@ -1,0 +1,9 @@
+bin/
+obj/
+artifacts/
+natives/
+*.rl
+*.user
+.vs/
+.idea/
+TestResults/

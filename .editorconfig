@@ -1,0 +1,24 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+indent_size = 4
+
+[*.{csproj,props,targets,json,yml,yaml}]
+indent_size = 2
+
+[*.cs]
+# Names mirror the domain on purpose: Cypher vector dtypes (Float32, Float, Integer) and the
+# Neo4j driver's Result.Single(). A record is addressed as a dictionary but is not one by name.
+dotnet_diagnostic.CA1720.severity = none
+dotnet_diagnostic.CA1710.severity = none
+
+[**/Data/*.cs]
+# ADO.NET base types define these shapes: non-generic collections (DbParameterCollection,
+# DbDataReader, DbConnectionStringBuilder) and IndexOutOfRangeException from GetOrdinal /
+# parameter lookup, as SqlClient and Microsoft.Data.Sqlite do.
+dotnet_diagnostic.CA1010.severity = none
+dotnet_diagnostic.CA2201.severity = none

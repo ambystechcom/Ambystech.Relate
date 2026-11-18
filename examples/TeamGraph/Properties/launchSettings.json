@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "TeamGraph": {
+      "commandName": "Project",
+      "commandLineArgs": "team.rl",
+      "workingDirectory": "."
+    }
+  }
+}

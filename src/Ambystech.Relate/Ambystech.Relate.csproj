@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- AOT/trim analyzers run on the newest TFM (same sources); on net8.0 they would pull ILLink 8.x from NuGet. -->
+    <IsAotCompatible Condition="'$(TargetFramework)' == 'net10.0'">true</IsAotCompatible>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RootNamespace>Ambystech.Relate</RootNamespace>
+
+    <PackageId>Ambystech.Relate</PackageId>
+    <Version>0.1.0</Version>
+    <Description>.NET client for Relate by Neo4j, the embedded Cypher graph database for AI agents. Driver-style API and an ADO.NET provider over Relate's typed C ABI v2, with the native engine bundled for win-x64, linux-x64, linux-arm64, osx-x64 and osx-arm64.</Description>
+    <PackageTags>relate;neo4j;cypher;graph;graph-database;embedded;ai-agents;ado.net</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Targets the Relate engine $(RelateEngineVersion) (C ABI v2).</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\THIRD-PARTY-NOTICES.md" Pack="true" PackagePath="\" />
+    <InternalsVisibleTo Include="Ambystech.Relate.Tests" />
+  </ItemGroup>
+
+  <!--
+    Bundled natives (runtimes/<rid>/native). Staged by scripts/fetch-natives.sh into
+    $(RelateNativesDir)/<rid>/. Whatever is staged is packed; CI stages all five.
+    They are also copied next to the build output so tests and samples run in-repo.
+  -->
+  <ItemGroup>
+    <RelateNative Include="$(RelateNativesDir)\**\*.so;$(RelateNativesDir)\**\*.dylib;$(RelateNativesDir)\**\*.dll" />
+    <None Include="@(RelateNative)"
+          Pack="true"
+          PackagePath="runtimes\%(RecursiveDir)native\%(Filename)%(Extension)"
+          Visible="false" />
+  </ItemGroup>
+
+  <Target Name="RelateWarnMissingNatives" BeforeTargets="Pack" Condition="'@(RelateNative)' == ''">
+    <Warning Text="No Relate natives staged in $(RelateNativesDir); the package will only work with RELATE_LIB set. Run scripts/fetch-natives.sh." />
+  </Target>
+
+</Project>

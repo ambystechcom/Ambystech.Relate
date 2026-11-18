@@ -1,0 +1,22 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+
+    <!-- The Relate engine release whose C ABI (v2) and natives this build targets. -->
+    <RelateEngineVersion>1.0.2</RelateEngineVersion>
+    <!-- Staged natives: <dir>/<rid>/{librelate_ffi.so|librelate_ffi.dylib|relate_ffi.dll}. -->
+    <RelateNativesDir Condition="'$(RelateNativesDir)' == ''">$(MSBuildThisFileDirectory)natives</RelateNativesDir>
+
+    <Authors>Ambystech</Authors>
+    <Company>Xolotl Byteworks S.A. de C.V.</Company>
+    <Copyright>Copyright (c) Ambystech</Copyright>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/ambystechcom/Ambystech.Relate</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/ambystechcom/Ambystech.Relate</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+</Project>
