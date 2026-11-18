@@ -123,46 +123,11 @@ while (reader.Read())
 - Register the factory with `DbProviderFactories.RegisterFactory(RelateDbProviderFactory.InvariantName, RelateDbProviderFactory.Instance)`.
 - **Dapper**: scalar parameters work (Dapper recognizes `$name`). Dapper expands `IEnumerable` parameters into `name1..nameN`, which Cypher's `$name` can't see, so pass lists and maps through `RelateDbCommand` or the driver API.
 
-## Type mapping
+## More documentation
 
-| Cypher | .NET (read) | .NET (parameter) |
-| --- | --- | --- |
-| `NULL` | `null` (`DBNull` in ADO.NET) | `null`, `DBNull` |
-| `BOOLEAN` | `bool` | `bool` |
-| `INTEGER` | `long` | any integral type |
-| `FLOAT` | `double` | `float`, `double`, `decimal` |
-| `STRING` | `string` | `string`, `char`, `Guid`, enums |
-| `LIST` | `List<object?>` | any `IEnumerable`; `byte[]` becomes a list of ints |
-| `MAP` | `Dictionary<string, object?>` | `IDictionary`, `IEnumerable<KeyValuePair<string, object?>>` |
-| `NODE` / `RELATIONSHIP` / `PATH` | `RelateNode` / `RelateRelationship` / `RelatePath` | n/a |
-| `DATE` | `DateOnly` | `DateOnly` |
-| `LOCAL TIME` | `TimeOnly`¹ | `TimeOnly` |
-| `LOCAL DATETIME` | `DateTime` (Unspecified)¹ | `DateTime` (Local/Unspecified) |
-| `ZONED DATETIME` | `DateTimeOffset`¹ | `DateTimeOffset`, `DateTime` (Utc), `RelateTemporal` with zone |
-| `ZONED TIME` | `RelateTemporal` | `RelateTemporal.OffsetTime(...)` |
-| `DURATION` | `RelateDuration` | `TimeSpan`, `RelateDuration` |
-| `POINT` | `RelatePoint` | `RelatePoint` |
-| `VECTOR` | `RelateVector` | `RelateVector` (a plain `float[]` binds as a `LIST`) |
-
-¹ When the value has sub-100 ns precision, a named IANA zone or a non-minute offset, it comes back as a lossless `RelateTemporal` instead. `Get<T>()` converts between compatible types (`long` to `int`, `RelateVector` to `float[]`, `RelateDuration` to `TimeSpan`, and so on).
-
-## Threading and store model
-
-- `RelateDatabase` is thread-safe; share one per store.
-- `RelateSession` serializes its own calls. Use one session per concurrent unit of work; distinct sessions run in parallel.
-- A persistent store has **one writer**: a second writable open of the same path, in or out of process, fails with a locked-store error. A `.rl` file also locks out read-only opens while a writer has it, while a directory store can be read beside its writer.
-- The whole graph lives in memory. There's no paging, replication, users or roles. See [Relate's limitations](https://relatedb.ai/docs/reference/limitations.md).
-- The engine is synchronous and in-process. `RunAsync` only moves the work to the thread pool, and cancellation is checked before the statement starts.
-
-## Native library resolution
-
-1. `RELATE_LIB`: an explicit path to `librelate_ffi.so`, `librelate_ffi.dylib` or `relate_ffi.dll`. This is the same escape hatch the upstream clients use.
-2. `runtimes/<rid>/native/` next to the app, which is how the package delivers it.
-3. The platform's default library search.
-
-The client checks `relate_abi_version() == 2` on first use.
-
-On Windows, the native engine needs the Visual C++ runtime (`VCRUNTIME140.dll`), which most machines already have. Linux binaries require glibc (no musl/Alpine build upstream).
+- [Type mapping](docs/type-mapping.md): Cypher to .NET, both directions.
+- [Threading and store model](docs/threading-and-store-model.md): sessions, the single writer, sync engine.
+- [Native library resolution](docs/native-library-resolution.md): `RELATE_LIB`, bundled natives, platform notes.
 
 ## Building from source
 
@@ -170,7 +135,7 @@ On Windows, the native engine needs the Visual C++ runtime (`VCRUNTIME140.dll`),
 scripts/fetch-natives.sh 1.0.2      # stages the five natives into ./natives (from the official npm platform packages)
 dotnet build -c Release
 dotnet test -c Release
-dotnet pack src/Ambystech.Relate -c Release -o artifacts
+dotnet pack src/Ambystech.Relate.csproj -c Release -o artifacts
 ```
 
 ## License

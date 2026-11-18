@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/src/">
-    <Project Path="src/Ambystech.Relate/Ambystech.Relate.csproj" />
+    <Project Path="src/Ambystech.Relate.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Ambystech.Relate.Tests/Ambystech.Relate.Tests.csproj" />

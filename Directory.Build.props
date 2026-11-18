@@ -11,6 +11,8 @@
     <!-- Staged natives: <dir>/<rid>/{librelate_ffi.so|librelate_ffi.dylib|relate_ffi.dll}. -->
     <RelateNativesDir Condition="'$(RelateNativesDir)' == ''">$(MSBuildThisFileDirectory)natives</RelateNativesDir>
 
+    <Version>0.1.0</Version>
+
     <Authors>Ambystech</Authors>
     <Company>Xolotl Byteworks S.A. de C.V.</Company>
     <Copyright>Copyright (c) Ambystech</Copyright>

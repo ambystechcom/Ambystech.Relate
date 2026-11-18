@@ -2,19 +2,6 @@ using System.Text.Json;
 
 namespace Ambystech.Relate;
 
-/// <summary>The engine phase a failure came from (ADR-0502 §2).</summary>
-public enum RelateErrorStage
-{
-    /// <summary>The failure was not classified by the engine (a binding-side failure).</summary>
-    Unknown = 0,
-    /// <summary>Parse, semantic or planning failure: the statement never ran.</summary>
-    Compile,
-    /// <summary>The statement failed while running.</summary>
-    Runtime,
-    /// <summary>An engine-internal, IO, storage or locked-store failure.</summary>
-    Internal,
-}
-
 /// <summary>
 /// Base exception for Relate. Engine failures carry the ADR-0502 §2 error shape:
 /// Neo4j status <see cref="Code"/>, <see cref="GqlStatus"/>, <see cref="Stage"/> and <see cref="Retryable"/>.
@@ -97,25 +84,4 @@ public class RelateException : Exception
         "internal" => RelateErrorStage.Internal,
         _ => RelateErrorStage.Unknown,
     };
-}
-
-/// <summary>The statement or request is wrong (<c>Neo.ClientError.*</c>): fix it, don't retry it.</summary>
-public sealed class RelateClientException : RelateException
-{
-    internal RelateClientException(string message, string? code, string? gqlStatus, RelateErrorStage stage)
-        : base(message, code, gqlStatus, stage, retryable: false) { }
-}
-
-/// <summary>The engine failed (<c>Neo.DatabaseError.*</c>).</summary>
-public sealed class RelateDatabaseException : RelateException
-{
-    internal RelateDatabaseException(string message, string? code, string? gqlStatus, RelateErrorStage stage)
-        : base(message, code, gqlStatus, stage, retryable: false) { }
-}
-
-/// <summary>A transient failure the engine marked retryable, such as a write-write conflict.</summary>
-public sealed class RelateTransientException : RelateException
-{
-    internal RelateTransientException(string message, string? code, string? gqlStatus, RelateErrorStage stage)
-        : base(message, code, gqlStatus, stage, retryable: true) { }
 }

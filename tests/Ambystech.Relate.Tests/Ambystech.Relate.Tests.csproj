@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Ambystech.Relate\Ambystech.Relate.csproj" />
+    <ProjectReference Include="..\..\src\Ambystech.Relate.csproj" />
   </ItemGroup>
 
   <!-- Natives under runtimes/<rid>/native in the test output, the layout NuGet restores for consumers. -->

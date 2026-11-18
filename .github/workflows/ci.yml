@@ -77,7 +77,7 @@ jobs:
 
       - name: Pack
         run: |
-          dotnet pack src/Ambystech.Relate -c Release -o artifacts ${PACKAGE_VERSION:+-p:Version=$PACKAGE_VERSION}
+          dotnet pack src/Ambystech.Relate.csproj -c Release -o artifacts ${PACKAGE_VERSION:+-p:Version=$PACKAGE_VERSION}
           unzip -l artifacts/*.nupkg | grep runtimes/ | tee /dev/stderr | wc -l | grep -qx 5
 
       - uses: actions/upload-artifact@v4

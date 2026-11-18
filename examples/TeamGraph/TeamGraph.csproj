@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Ambystech.Relate\Ambystech.Relate.csproj" />
+    <ProjectReference Include="..\..\src\Ambystech.Relate.csproj" />
   </ItemGroup>
 
   <!-- Natives under runtimes/<rid>/native, staged by scripts/fetch-natives.sh (or set RELATE_LIB). -->
