@@ -1,0 +1,45 @@
+---
+title: Relate.NET
+description: A .NET client for Relate by Neo4j, the embedded Cypher graph database for AI agents.
+template: splash
+hero:
+  tagline: Help agents understand data. An embedded Cypher graph database for .NET, with no server and a single file.
+  image:
+    file: ../../assets/pet.png
+    alt: Relate.NET mascot typing on a .NET laptop
+  actions:
+    - text: Get started
+      link: /getting-started/install/
+      icon: right-arrow
+    - text: View on GitHub
+      link: https://github.com/ambystechcom/Ambystech.Relate
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid stagger>
+  <Card title="Runs inside your process" icon="rocket">
+    The Relate engine is embedded: no server, container or credentials to manage. Open `:memory:` for a scratch graph or a single `.rl` file you can commit to a repo.
+  </Card>
+  <Card title="Driver-style API" icon="puzzle">
+    `RelateDatabase`, `RelateSession` and `RelateTransaction`, typed records and rich graph values: nodes, relationships, paths, temporals, points, durations and vectors.
+  </Card>
+  <Card title="ADO.NET provider" icon="seti:db">
+    `RelateDbConnection`, `RelateDbCommand`, `RelateDbDataReader` and a `DbProviderFactory`, so existing data-access code and Dapper scalar parameters work.
+  </Card>
+  <Card title="Vector search plus traversal" icon="magnifier">
+    `SEARCH` and graph traversal run in the same Cypher statement, which makes it a natural fit for agent memory.
+  </Card>
+  <Card title="Native engine bundled" icon="laptop">
+    The Relate library ships in the package for `win-x64`, `linux-x64`, `linux-arm64`, `osx-x64` and `osx-arm64`.
+  </Card>
+  <Card title="Modern .NET" icon="approve-check">
+    Targets `net8.0` and `net10.0`, trimming- and AOT-annotated, built on Relate's typed C ABI v2 with `LibraryImport` source-generated interop.
+  </Card>
+</CardGrid>
+
+:::note
+Community package by [Ambystech](https://www.ambystech.io). Not affiliated with or endorsed by Neo4j, Inc. Relate is Apache-2.0 software by Neo4j.
+:::
