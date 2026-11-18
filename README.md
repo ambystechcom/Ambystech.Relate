@@ -1,4 +1,6 @@
-# Ambystech.Relate
+<p align="center">
+  <img src="public/banner.png" alt="Relate.NET: help agents understand data" width="100%">
+</p>
 
 .NET client for [Relate by Neo4j](https://relatedb.ai), the open-source embedded Cypher graph database built for AI agents. The engine runs **inside your process**: there's no server, container or credentials to manage. Open `:memory:` for a scratch graph or a single `.rl` file you can commit to a repo.
 
