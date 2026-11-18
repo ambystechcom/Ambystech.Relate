@@ -34,7 +34,8 @@ for entry in "${PLATFORMS[@]}"; do
   tar -xzf "$tgz" -C "$WORK/$rid"
   mkdir -p "$OUT/$rid"
   cp "$WORK/$rid/package/lib/$lib" "$OUT/$rid/$lib"
-  (cd "$OUT/$rid" && sha256sum "$lib")
+  # sha256sum is GNU coreutils; macOS ships shasum instead.
+  (cd "$OUT/$rid" && { command -v sha256sum >/dev/null && sha256sum "$lib" || shasum -a 256 "$lib"; })
 done
 
 echo "$VERSION" > "$OUT/VERSION"
