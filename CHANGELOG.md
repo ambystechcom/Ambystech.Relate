@@ -11,6 +11,7 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ### Added
 - `examples/TeamGraph` sample app.
+- `samples/Ambystech.Relate.Samples.GraphCursor`: an MCP server demo where the agent walks the graph with `next_hop` / `take` instead of writing Cypher, with an audit graph and tests.
 
 ## [0.1.0]
 

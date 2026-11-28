@@ -8,4 +8,8 @@
   <Folder Name="/examples/">
     <Project Path="examples/TeamGraph/TeamGraph.csproj" />
   </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/Ambystech.Relate.Samples.GraphCursor/Ambystech.Relate.Samples.GraphCursor.csproj" />
+    <Project Path="samples/Ambystech.Relate.Samples.GraphCursor.Tests/Ambystech.Relate.Samples.GraphCursor.Tests.csproj" />
+  </Folder>
 </Solution>
