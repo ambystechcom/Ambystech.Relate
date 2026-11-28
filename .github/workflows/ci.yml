@@ -3,8 +3,9 @@ name: ci
 on:
   push:
     branches: [main]
-    tags: ["v*"]
   pull_request:
+  release:
+    types: [published]   # publishing a GitHub Release (tag vX.Y.Z) deploys to nuget.org
 
 permissions:
   contents: read
@@ -71,9 +72,11 @@ jobs:
       - name: Stage Relate natives (all RIDs)
         run: scripts/fetch-natives.sh "$RELATE_ENGINE_VERSION"
 
-      - name: Version from tag
-        if: startsWith(github.ref, 'refs/tags/v')
-        run: echo "PACKAGE_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
+      - name: Version from release tag
+        if: github.event_name == 'release'
+        env:
+          TAG: ${{ github.event.release.tag_name }}
+        run: echo "PACKAGE_VERSION=${TAG#v}" >> "$GITHUB_ENV"
 
       - name: Pack
         run: |
@@ -86,7 +89,7 @@ jobs:
           path: artifacts/*.nupkg
 
   publish:
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: github.event_name == 'release'
     needs: pack
     runs-on: ubuntu-latest
     environment: release
