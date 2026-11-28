@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="public/banner.png" alt="Relate.NET: help agents understand data" width="100%">
-</p>
+![Relate.NET: help agents understand data](https://raw.githubusercontent.com/ambystechcom/Ambystech.Relate/main/public/banner.png)
 
 .NET client for [Relate by Neo4j](https://relatedb.ai), the open-source embedded Cypher graph database built for AI agents. The engine runs **inside your process**: there's no server, container or credentials to manage. Open `:memory:` for a scratch graph or a single `.rl` file you can commit to a repo.
 
@@ -129,9 +127,9 @@ while (reader.Read())
 
 Full documentation site: **https://relate.ambystech.io**
 
-- [Type mapping](docs/type-mapping.md): Cypher to .NET, both directions.
-- [Threading and store model](docs/threading-and-store-model.md): sessions, the single writer, sync engine.
-- [Native library resolution](docs/native-library-resolution.md): `RELATE_LIB`, bundled natives, platform notes.
+- [Type mapping](https://github.com/ambystechcom/Ambystech.Relate/blob/main/docs/type-mapping.md): Cypher to .NET, both directions.
+- [Threading and store model](https://github.com/ambystechcom/Ambystech.Relate/blob/main/docs/threading-and-store-model.md): sessions, the single writer, sync engine.
+- [Native library resolution](https://github.com/ambystechcom/Ambystech.Relate/blob/main/docs/native-library-resolution.md): `RELATE_LIB`, bundled natives, platform notes.
 
 ## Building from source
 
@@ -144,4 +142,4 @@ dotnet pack src/Ambystech.Relate.csproj -c Release -o artifacts
 
 ## License
 
-Apache-2.0. The bundled Relate engine is Apache-2.0, © Neo4j, Inc.; see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+Apache-2.0. The bundled Relate engine is Apache-2.0, © Neo4j, Inc.; see [THIRD-PARTY-NOTICES.md](https://github.com/ambystechcom/Ambystech.Relate/blob/main/THIRD-PARTY-NOTICES.md).

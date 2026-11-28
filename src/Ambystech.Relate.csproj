@@ -12,11 +12,13 @@
     <Description>.NET client for Relate by Neo4j, the embedded Cypher graph database for AI agents. Driver-style API and an ADO.NET provider over Relate's typed C ABI v2, with the native engine bundled for win-x64, linux-x64, linux-arm64, osx-x64 and osx-arm64.</Description>
     <PackageTags>relate;neo4j;cypher;graph;graph-database;embedded;ai-agents;ado.net</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageReleaseNotes>Targets the Relate engine $(RelateEngineVersion) (C ABI v2).</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\icon.png" Pack="true" PackagePath="\" />
     <None Include="..\LICENSE" Pack="true" PackagePath="\" />
     <None Include="..\THIRD-PARTY-NOTICES.md" Pack="true" PackagePath="\" />
     <InternalsVisibleTo Include="Ambystech.Relate.Tests" />
